@@ -1,0 +1,13 @@
+//
+//  Config.xcconfig
+//  keychain-kit
+//
+//  Created by Aleksey Zgurskiy on 02.02.2020.
+//  Copyright © 2020 mr.noone. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+INFOPLIST_FILE = keychain-kit/Support Files/Info.plist
+PRODUCT_NAME = KeychainKit // $(TARGET_NAME:c99extidentifier)
