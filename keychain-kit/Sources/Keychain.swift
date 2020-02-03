@@ -46,7 +46,17 @@ public struct Keychain {
   }
   
   public func get(_ key: String) throws -> String {
-    return String(data: try get(key), encoding: .utf8)!
+    guard let value = String(data: try get(key), encoding: .utf8) else {
+      throw Error.unexpectedData
+    }
+    return value
+  }
+  
+  public func get(_ key: String) throws -> UUID {
+    guard let value = UUID(uuidString: try get(key)) else {
+      throw Error.unexpectedData
+    }
+    return value
   }
   
   public func get<T>(_ key: String, decoder: JSONDecoder = JSONDecoder()) throws -> T where T: Decodable {
@@ -68,6 +78,10 @@ public struct Keychain {
   
   public func set(_ value: String, for key: String) throws {
     try set(value.data(using: .utf8)!, for: key)
+  }
+  
+  public func set(_ uuid: UUID, for key: String) throws {
+    try set(uuid.uuidString, for: key)
   }
   
   public func set<T>(_ value: T, for key: String, encoder: JSONEncoder = JSONEncoder()) throws where T: Encodable {
