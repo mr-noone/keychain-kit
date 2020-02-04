@@ -26,6 +26,7 @@ public struct Keychain {
       kSecClass : kSecClassGenericPassword,
       kSecAttrAccount : key as AnyObject,
       kSecMatchLimit : kSecMatchLimitOne,
+      kSecReturnAttributes : kCFBooleanTrue,
       kSecReturnData : kCFBooleanTrue
     ]
     
