@@ -8,7 +8,21 @@
 
 import Foundation
 
-public struct Keychain {
+public protocol KeychainProtocol {
+  func get(_ key: String) throws -> Data
+  func get(_ key: String) throws -> String
+  func get(_ key: String) throws -> UUID
+  func get<T>(_ key: String, decoder: JSONDecoder) throws -> T where T: Decodable
+  
+  func set(_ data: Data, for key: String) throws
+  func set(_ value: String, for key: String) throws
+  func set(_ uuid: UUID, for key: String) throws
+  func set<T>(_ value: T, for key: String, encoder: JSONEncoder) throws where T: Encodable
+  
+  func delete(_ key: String) throws
+}
+
+public struct Keychain: KeychainProtocol {
   public enum Error: Swift.Error {
     case noData
     case unexpectedData
